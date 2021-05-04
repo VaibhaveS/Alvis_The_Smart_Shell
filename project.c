@@ -144,7 +144,7 @@ int main(void)
            //printf("hello");
            continue;
         }
-  	else if(args[1]==NULL && strcmp(args[0],"roundrobin")==0){
+  	else if(args[1]==NULL && strcmp(args[0],"strf")==0){
   	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
@@ -153,7 +153,7 @@ int main(void)
            } 
            else if(pid==0) {
          	//printf("executing %s",argsPtr[0]);
-         	char *a[]={"./roundrobin",NULL};
+         	char *a[]={"./strf",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
                     return 1;
