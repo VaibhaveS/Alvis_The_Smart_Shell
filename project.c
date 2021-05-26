@@ -1,5 +1,6 @@
 
 
+
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -319,7 +320,31 @@ int main(void)
             }
            continue;
   	}
-
+	else if(args[1]==NULL && strcmp(args[0],"LRU")==0){
+  	//printf("ucame");
+  	   pid = fork();
+  	   if(pid<0) {
+            printf("FORK FAILED\n");
+            return 1;
+           } 
+           else if(pid==0) {
+         	//printf("executing %s",argsPtr[0]);
+         	char *a[]={"./LRU",NULL};
+            	if(execvp(a[0],a)) {
+                    printf("INVALID COMMAND\n");
+                    return 1;
+                }
+            } 
+            else {
+                if(need_to_wait) {
+                   while(wait(NULL) != pid);
+                }
+                else {
+                   printf("[1]%d\n",pid);
+               }
+            }
+           continue;
+  	}
         if(mode) { //TODO
         //printf("fdf");
            char *st=convert(args);
