@@ -11,8 +11,8 @@
 
 
 #define MAX_LINE		80 /* 80 chars per line, per command */
-char* dp[1]={"open .c"}; //char* , char[] please open lol.c ~9
-char* actual[1]={"cat"};
+char* dp[3]={"open .c","show directory","make new directory ####"}; //char* , char[] please open lol.c ~9
+char* actual[3]={"cat","ls","mkdir"};
 char* history[10][MAX_LINE/2 + 1]; //array which stores the commands
 int history_wait[10];
 int buffHead = 0; //pointer, which points to the most recent command in the array
