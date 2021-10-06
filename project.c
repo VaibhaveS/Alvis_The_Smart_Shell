@@ -37,34 +37,26 @@ int minDistance(char *word1, char *word2) { //dp to find the closest match
 	return arr[l1][l2];
 }
 int file_name(char *s){ //returns 1 if s is a filename
-	//printf("checking for %s\n",s);
    for(int i=0;i<sizeof(s)/sizeof(s[0]);i++){
- //  printf("chars %c %c\n",s[i],s[i+1]);
       if(s[i]=='.' && i+1 < sizeof(s)/sizeof(s[0]) && s[i+1]=='c') {
-    //  	printf("yessss");
       return 1;
       }
    }
    return 0;
 }
-char* parse_file_name(char **st){ //st="please open lol.c"
-    //char parsed[];
+char* parse_file_name(char **st){ //st="please open file_name.c"
     int sz=0,j=0;
     while(st[j]) {
     	j++;
     }
     for(int i=0;i<j;i++){
-      //  printf("%d checking for %s\n",i,st[i]);
     	if(file_name(st[i])) { //lol.c
     	   return st[i];	
     	}
     }
-    //char *par=parsed;
-    //return par;
     return NULL;
 }
 char* convert(char **args){
-  // printf("came %s",args[0]);
   int pts=1e5,best=-1;
   for(int i=0;i<sizeof(dp)/sizeof(dp[0]);i++){
       if(minDistance(dp[i],args[0]) < pts){
@@ -87,8 +79,6 @@ int main(void)
 {
     char *args[MAX_LINE/2 + 1];	/* command line (of 80) has max of 40 arguments */
     int should_run = 1;
-	
-	/*int i, upper;*/
     printf("Alvis!, the smart shell\n");
     printf("New to shell?, enter 'newbie' to toggle newbie mode...\n");
     init_history();
@@ -146,7 +136,6 @@ int main(void)
            continue;
         }
   	else if(args[1]==NULL && strcmp(args[0],"roundrobin")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
@@ -171,7 +160,6 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"SJF")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
@@ -196,14 +184,12 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"FCFS")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./FCFS",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -221,7 +207,6 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"priority")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
@@ -246,7 +231,6 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"STRF")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
@@ -271,7 +255,6 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"Paging_one_level")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
@@ -296,7 +279,6 @@ int main(void)
            continue;
   	}
 	else if(args[1]==NULL && strcmp(args[0],"Paging_two_level")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
@@ -321,14 +303,12 @@ int main(void)
            continue;
   	}
 	else if(args[1]==NULL && strcmp(args[0],"LRU")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./LRU",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -346,14 +326,12 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"FIFO")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./FIFO",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -371,14 +349,12 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"NEXT_FIT")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./NEXT",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -396,14 +372,12 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"FIRST_FIT")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./first",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -421,14 +395,12 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"BEST_FIT")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./best",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -446,14 +418,12 @@ int main(void)
            continue;
   	}
   	else if(args[1]==NULL && strcmp(args[0],"WORST_FIT")==0){
-  	//printf("ucame");
   	   pid = fork();
   	   if(pid<0) {
             printf("FORK FAILED\n");
             return 1;
            } 
            else if(pid==0) {
-         	//printf("executing %s",argsPtr[0]);
          	char *a[]={"./worst",NULL};
             	if(execvp(a[0],a)) {
                     printf("INVALID COMMAND\n");
@@ -470,11 +440,9 @@ int main(void)
             }
            continue;
   	}
-        if(mode) { //TODO
-        //printf("fdf");
+        if(mode) { 
            char *st=convert(args);
            char *st2=parse_file_name(args);
-         //  printf("file name is %c\n",st2[0]);
            char *argsPtr[3]={st,st2,NULL};
           printf("hai, the command you are looking for is %s\n",st);
           sleep(3);
@@ -486,14 +454,12 @@ int main(void)
                 printf("INVALID COMMAND\n");
                 return 1;
             }
-           //continue;
         }
         if(args[1]==NULL && strcmp(args[0],"history")==0) {
             print_history();
             continue;
         }
         char **argsPtr = history_computation(args, &need_to_wait);
-                //printf("second is %s second is %s third is %s",argsPtr[0],argsPtr[1],argsPtr[2]);
         //Fork child to Execute args
         if(args[1]==NULL && strcmp(args[0],"vis")==0) {
             printf("Visualize with alvis!\n");
@@ -504,8 +470,6 @@ int main(void)
             printf("FORK FAILED\n");
             return 1;
         } else if(pid==0) {
-         //printf("executing %s",argsPtr[0]);
-         
             if(execvp(argsPtr[0],argsPtr)) {
                 printf("INVALID COMMAND\n");
                 return 1;
@@ -530,10 +494,6 @@ int main(void)
 }
 char** history_computation(char **args, int *needWait) {
     int i;
-  //  if(args[1]==NULL && strcmp(args[0],"vis")==0){
-    	//printf("lmao");
-    //	return args;
-    //}
     if(args[1]==NULL && strcmp(args[0],"!!")==0) {
         if(buffHead>0){
             strcpy(args[0],history[(buffHead-1)%10][0]);
@@ -569,7 +529,7 @@ char** history_computation(char **args, int *needWait) {
             return args;
         }
     }
-	//adds to the history array
+    //adds to the history array
     for(i=0;i<(MAX_LINE/2+1) && history[buffHead%10][i]!=NULL;i++)
         free(history[buffHead%10][i]);
     for(i=0;args[i]!=NULL;i++) {
