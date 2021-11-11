@@ -49,7 +49,6 @@ int minDistance(string &word1, string &word2) {
 
 string parse_file_name(vector<string> &arguments){ 
  	regex regexp("([a-zA-Z0-9\\s_\\.\\-\\(\\):])+(.doc|.docx|.pdf|.c|.cpp|.py)$"); 
-    // flag type for determining the matching behavior (in this case on string objects)
     for(auto &input:arguments){
      	if(regex_match(input,regexp)){
      		return input;
@@ -66,8 +65,7 @@ vector<string> convert(string &argument){
         best=i;
       }
   }
-  if(best==-1) return {};
-  else {
+  if(best!=-1) {
   	return {actual[best]};
   }
   return {};
@@ -92,6 +90,7 @@ vector<string> split_line(string &cmd_line){
 
 void remove_from_buffer(){
 	if(!buffer_queue.empty()) buffer_queue.pop_back();
+	else cout<<"buffer is empty!\n";
 }
 
 void update_buffer(vector<string> &argument){
@@ -119,17 +118,15 @@ int main(void) {
   	
   	string cmd_line;
     int should_run = 1;
-    printf("Alvis!, the smart shell\n");
-    printf("New to shell?, enter 'newbie' to toggle newbie mode...\n");
+    cout<<"Alvis!, the smart shell\n";
+    cout<<"New to shell?, enter 'newbie' to toggle newbie mode...\n";
 	Mode mode=Normal;
 	
     while (should_run) {   
     
-        printf("alvis>");
+        cout<<"alvis>";
         fflush(stdout);
-      //  buffer_queue.push_back("gg");
-    	cout<<buffer_queue.size()<<"\n";    
-    	
+     	
         pid_t pid;
        
         getline(cin, cmd_line);
