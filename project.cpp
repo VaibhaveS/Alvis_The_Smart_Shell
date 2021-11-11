@@ -125,7 +125,6 @@ int main(void) {
     while (should_run) {   
     
         cout<<"alvis>";
-        fflush(stdout);
      	
         pid_t pid;
        
