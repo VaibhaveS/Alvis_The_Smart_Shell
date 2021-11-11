@@ -8,43 +8,63 @@ struct Process {
 	int art; // Arrival Time
 };
 
+int priority(char op){
+    if(op=='+' or op=='-') return 1;
+    if(op=='*' or op=='/') return 2;
+    return -1;
+}
+
+long long int eval(long long int a,long long int b,char op){
+    if(op=='+') return a+b;
+    if(op=='-') return a-b;
+    if(op=='*') return a*b;
+    if(op=='/') return a/b;
+    return -1;
+}
 int calculate(string s,Process p) { //CALCULATES PRIORITY OF A PROCESS
-    stack<int> myStack;
-    char sign = '+';
-    int res = 0, tmp = 0;
-    for (unsigned int i = 0; i < s.size(); i++) {
-        if (s[i]=='X' or s[i]=='Y' or s[i]=='Z') {
-            int value=0;
+
+    int n=s.length();
+    stack<long long int> numbers,operators;
+    int i=0;
+    while(i<n){
+        if(s[i]==' '){
+            i++;
+            continue;
+        }
+        else if(s[i]=='X' or s[i]=='Y' or s[i]=='Z'){
+        	long long int value=0;
             if(s[i]=='X') value=p.pid;
             else if(s[i]=='Y') value=p.bt;
             else value=p.art;
-            tmp = 10*tmp + value;    
-		}
-    	if (!(s[i]=='X' or s[i]=='Y' or s[i]=='Z') && !isspace(s[i]) || i == s.size()-1) {
-	        if (sign == '-')
-	            myStack.push(-tmp);
-	        else if (sign == '+') {
-	            myStack.push(tmp);
-	        }
-	        else {
-	            int num;
-	            if (sign == '*' )
-	                num = myStack.top()*tmp;
-	            else
-	                num = myStack.top()/tmp;
-	            myStack.pop();
-	            myStack.push(num);
-	            } 
-	            sign = s[i];
-	            tmp = 0;
-	        }
+            numbers.push(value);
+        }
+        else {
+            //operator
+            while(!operators.empty() and priority(s[i])<=priority(operators.top())){
+                auto b=numbers.top(); //2nd guy
+                numbers.pop();
+                auto a=numbers.top(); //1st guy
+                numbers.pop();
+                auto op=operators.top();
+                operators.pop();
+                numbers.push(eval(a,b,op));
+            }
+            operators.push(s[i]);
+            i++;
+        }
     }
-    while (!myStack.empty()) {
-        res += myStack.top();
-        myStack.pop();
+    while(!operators.empty()){
+        auto b=numbers.top();
+        numbers.pop();
+        auto a=numbers.top();
+        numbers.pop();
+        auto op=operators.top();
+        operators.pop();
+        numbers.push(eval(a,b,op));
     }
-    return res;
+    return numbers.top();
 }
+
 
 void findTurnAroundTime(vector<Process> &proc,int n,vector<int> &wt, vector<int> &tat) {
 	for (int i = 0; i < n; i++)
